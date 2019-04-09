@@ -6,6 +6,7 @@ class App extends React.Component {
     return (
       <h1>
         <Note />
+        <Display />
       </h1>
     );
   }
@@ -24,7 +25,6 @@ class Note extends React.Component {
           {this.state.message}
           <input type="text" name="note" />
           <input type="submit" value="Submit" />
-          <Display />
         </form>
       </div>
     );
@@ -32,7 +32,17 @@ class Note extends React.Component {
 }
 
 const Display = () => {
-  return <h1>text</h1>;
+  return (
+    <div class="card">
+      <div class="container">
+        <h4>
+          <b>Author</b>
+        </h4>
+        <p>Note text</p>
+        <p>Time</p>
+      </div>
+    </div>
+  );
 };
 
 export default App;

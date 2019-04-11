@@ -1,5 +1,6 @@
 import React from "react";
-import "./app.css";
+import "./App.css";
+import { noteData } from "./data";
 
 class App extends React.Component {
   render() {
@@ -18,11 +19,17 @@ class Note extends React.Component {
     this.state = { message: "Insert Note: " };
   }
 
+  parseData() {
+    noteData.forEach(element => {
+      return <p>{element.message}</p>;
+    });
+  }
+
   render() {
     return (
       <div>
         <form action="/submitNote">
-          {this.state.message}
+          {this.parseData()}
           <input type="text" name="note" />
           <input type="submit" value="Submit" />
         </form>

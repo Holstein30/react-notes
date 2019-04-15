@@ -19,12 +19,27 @@ class Note extends React.Component {
     this.state = { message: "Insert Note: " };
   }
 
+  handleChange(e) {
+    console.log(e);
+    // this.setState = { message: e.target.value };
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+  }
+
   render() {
     return (
       <div>
-        <form action="/submitNote">
+        <form onSubmit={this.handleSubmit} action="/submitNote">
           {this.state.message}
-          <input type="text" name="note" />
+          <input
+            type="text"
+            name="note"
+            value={this.state.message}
+            onChange={this.handleChange}
+          />
           <input type="submit" value="Submit" />
         </form>
       </div>
@@ -34,8 +49,8 @@ class Note extends React.Component {
 
 const Display = () => {
   return (
-    <div class="card">
-      <div class="container">
+    <div className="card">
+      <div className="container">
         <NoteList />
       </div>
     </div>

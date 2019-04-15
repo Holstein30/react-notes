@@ -16,33 +16,34 @@ class App extends React.Component {
 class Note extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { message: "Insert Note: " };
+    this.state = { value: "" };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
-    e.preventDefault();
-    console.log(e);
-    // this.setState = { message: e.target.value };
+  handleChange(event) {
+    this.setState({ value: event.target.value });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.state.message);
+  handleSubmit(event) {
+    alert("Note: " + this.state.value);
+    event.preventDefault();
   }
 
   render() {
     return (
-      <div>
-        <form action="/submitNote">
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Insert Note:
           <input
             type="text"
-            name="note"
-            defaultValue={this.state.message}
+            value={this.state.value}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Submit" onSubmit={this.handleSubmit} />
-        </form>
-      </div>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     );
   }
 }

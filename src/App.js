@@ -20,27 +20,27 @@ class Note extends React.Component {
   }
 
   handleChange(e) {
+    e.preventDefault();
     console.log(e);
     // this.setState = { message: e.target.value };
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
+    console.log(this.state.message);
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} action="/submitNote">
-          {this.state.message}
+        <form action="/submitNote">
           <input
             type="text"
             name="note"
-            value={this.state.message}
+            defaultValue={this.state.message}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" onSubmit={this.handleSubmit} />
         </form>
       </div>
     );

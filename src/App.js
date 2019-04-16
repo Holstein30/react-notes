@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { noteData } from "./data";
 let noteArray = noteData;
+noteArray.push({ author: "dale", message: "howdy", date: "now" });
 
 class App extends React.Component {
   render() {
@@ -44,7 +45,7 @@ class Note extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <input type="submit" value="Submit" onClick={this.NoteList} />
+        <input type="submit" value="Submit" />
       </form>
     );
   }
@@ -60,13 +61,13 @@ const Display = () => {
   );
 };
 
-const NoteList = ({ handleOnClick }) => {
-  const cells = noteArray.map(note => {
+const NoteList = () => {
+  const cells = noteArray.map((note, i) => {
     return (
       <div>
-        <p>{note.author}</p>
-        <p>{note.message}</p>
-        <p>{note.date}</p>
+        <p key={i}>{note.author}</p>
+        <p key={"message" + i}>{note.message}</p>
+        <p key={"date" + i}>{note.date}</p>
       </div>
     );
   });

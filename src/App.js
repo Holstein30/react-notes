@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { noteData } from "./data";
+let noteArray = noteData;
 
 class App extends React.Component {
   render() {
@@ -28,6 +29,7 @@ class Note extends React.Component {
 
   handleSubmit(event) {
     alert("Note: " + this.state.value);
+    noteArray.push(this.state);
     event.preventDefault();
   }
 
@@ -42,7 +44,7 @@ class Note extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" onClick={this.NoteList} />
       </form>
     );
   }
@@ -59,7 +61,7 @@ const Display = () => {
 };
 
 const NoteList = ({ handleOnClick }) => {
-  const cells = noteData.map(note => {
+  const cells = noteArray.map(note => {
     return (
       <div>
         <p>{note.author}</p>

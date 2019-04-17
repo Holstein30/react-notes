@@ -29,6 +29,9 @@ class App extends React.Component {
     this.setState({
       notes: newNotes
     });
+    this.noteTitle.value = "";
+    this.noteText.value = "";
+    this.showSidebar(e);
   }
 
   render() {
@@ -41,9 +44,11 @@ class App extends React.Component {
               Add New Note
             </a>
             <section className="notes">
-              {this.state.notes.map(note => {
-                return <NoteCard note={note} />;
-              })}
+              {this.state.notes
+                .map((note, i) => {
+                  return <NoteCard note={note} key={`note-${i}`} />;
+                })
+                .reverse()}
             </section>
             <aside className="sidebar" ref={ref => (this.sidebar = ref)}>
               <form onSubmit={this.addNote}>

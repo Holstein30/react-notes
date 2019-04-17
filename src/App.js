@@ -61,6 +61,12 @@ class App extends React.Component {
     this.showSidebar(e);
   }
 
+  removeNote(noteId) {
+    console.log(noteId);
+    const dbRef = firebase.database().ref(noteId);
+    dbRef.remove();
+  }
+
   render() {
     return (
       <div>
@@ -73,7 +79,13 @@ class App extends React.Component {
             <section className="notes">
               {this.state.notes
                 .map((note, i) => {
-                  return <NoteCard note={note} key={`note-${i}`} />;
+                  return (
+                    <NoteCard
+                      note={note}
+                      key={`note-${i}`}
+                      removeNote={this.removeNote}
+                    />
+                  );
                 })
                 .reverse()}
             </section>

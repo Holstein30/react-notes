@@ -2,13 +2,21 @@ import React from "react";
 import "./App.css";
 
 class App extends React.Component {
+  showSidebar(e) {
+    e.preventDefault();
+    console.log("howdy");
+    console.log(this);
+  }
+
   render() {
     return (
       <div>
         <header className="mainHeader">
           <h1>Noted</h1>
           <nav>
-            <a href="">Add New Note</a>
+            <a href="" onClick={this.showSidebar}>
+              Add New Note
+            </a>
             <section className="notes">
               <div className="noteCard">
                 <i className="fa fa-edit" />

@@ -2,10 +2,14 @@ import React from "react";
 import "./App.css";
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.showSidebar = this.showSidebar.bind(this);
+  }
+
   showSidebar(e) {
     e.preventDefault();
-    console.log("howdy");
-    console.log(this);
+    this.sidebar.classList.toggle("show");
   }
 
   render() {
@@ -30,10 +34,10 @@ class App extends React.Component {
                 </p>
               </div>
             </section>
-            <aside className="sidebar">
+            <aside className="sidebar" ref={ref => (this.sidebar = ref)}>
               <form>
                 <h3>Add New Note</h3>
-                <div className="close-btn">
+                <div className="close-btn" onClick={this.showSidebar}>
                   <i className="fa fa-times" />
                 </div>
                 <label htmlFor="note-title">Title:</label>

@@ -29,7 +29,15 @@ class App extends React.Component {
       .database()
       .ref()
       .on("value", res => {
-        console.log(res);
+        const userData = res.val();
+        const dataArray = [];
+        for (let objKey in userData) {
+          userData[objKey].key = objKey;
+          dataArray.push(userData[objKey]);
+        }
+        this.setState({
+          notes: dataArray
+        });
       });
   }
 
@@ -40,16 +48,14 @@ class App extends React.Component {
 
   addNote(e) {
     e.preventDefault();
-    console.log("submitted");
     const note = {
       title: this.noteTitle.value,
       text: this.noteText.value
     };
-    const newNotes = Array.from(this.state.notes);
-    newNotes.push(note);
-    this.setState({
-      notes: newNotes
-    });
+
+    const dbRef = firebase.database().ref();
+    dbRef.push(note);
+
     this.noteTitle.value = "";
     this.noteText.value = "";
     this.showSidebar(e);

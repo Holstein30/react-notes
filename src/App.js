@@ -1,6 +1,18 @@
 import React from "react";
+import firebase from "firebase";
 import NoteCard from "./notesCard";
 import "./App.css";
+
+// Initialize Firebase
+const config = {
+  apiKey: "AIzaSyDjXetmNBP0LfJ08oc2xI5eO3aNkl8q1r0",
+  authDomain: "react-notes-29a14.firebaseapp.com",
+  databaseURL: "https://react-notes-29a14.firebaseio.com",
+  projectId: "react-notes-29a14",
+  storageBucket: "react-notes-29a14.appspot.com",
+  messagingSenderId: "620863045487"
+};
+firebase.initializeApp(config);
 
 class App extends React.Component {
   constructor() {
@@ -10,6 +22,15 @@ class App extends React.Component {
     };
     this.showSidebar = this.showSidebar.bind(this);
     this.addNote = this.addNote.bind(this);
+  }
+
+  componentDidMount() {
+    firebase
+      .database()
+      .ref()
+      .on("value", res => {
+        console.log(res);
+      });
   }
 
   showSidebar(e) {

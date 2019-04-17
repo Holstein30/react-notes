@@ -1,4 +1,5 @@
 import React from "react";
+import NoteCard from "./notesCard";
 import "./App.css";
 
 class App extends React.Component {
@@ -40,17 +41,9 @@ class App extends React.Component {
               Add New Note
             </a>
             <section className="notes">
-              <div className="noteCard">
-                <i className="fa fa-edit" />
-                <i className="fa fa-times" />
-                <h4>Test Note</h4>
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Reiciendis perferendis corrupti itaque quos alias. Nobis
-                  obcaecati ipsa iure molestias. Sequi sint amet, dignissimos
-                  soluta dolores quos quasi porro perspiciatis optio.
-                </p>
-              </div>
+              {this.state.notes.map(note => {
+                return <NoteCard note={note} />;
+              })}
             </section>
             <aside className="sidebar" ref={ref => (this.sidebar = ref)}>
               <form onSubmit={this.addNote}>

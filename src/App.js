@@ -76,38 +76,39 @@ class App extends React.Component {
             <a href="" onClick={this.showSidebar}>
               Add New Note
             </a>
-            <section className="notes">
-              {this.state.notes
-                .map((note, i) => {
-                  return (
-                    <NoteCard
-                      note={note}
-                      key={`note-${i}`}
-                      removeNote={this.removeNote}
-                    />
-                  );
-                })
-                .reverse()}
-            </section>
-            <aside className="sidebar" ref={ref => (this.sidebar = ref)}>
-              <form onSubmit={this.addNote}>
-                <h3>Add New Note</h3>
-                <div className="close-btn" onClick={this.showSidebar}>
-                  <i className="fa fa-times" />
-                </div>
-                <label htmlFor="note-title">Title:</label>
-                <input
-                  type="text"
-                  name="note-title"
-                  ref={ref => (this.noteTitle = ref)}
-                />
-                <label htmlFor="note-text">Text:</label>
-                <textarea name="note-text" ref={ref => (this.noteText = ref)} />
-                <input type="submit" value="Add New Note" />
-              </form>
-            </aside>
           </nav>
         </header>
+        <div className="overlay" ref={ref => (this.overlay = ref)} />
+        <section className="notes">
+          {this.state.notes
+            .map((note, i) => {
+              return (
+                <NoteCard
+                  note={note}
+                  key={`note-${i}`}
+                  removeNote={this.removeNote}
+                />
+              );
+            })
+            .reverse()}
+        </section>
+        <aside className="sidebar" ref={ref => (this.sidebar = ref)}>
+          <form onSubmit={this.addNote}>
+            <h3>Add New Note</h3>
+            <div className="close-btn" onClick={this.showSidebar}>
+              <i className="fa fa-times" />
+            </div>
+            <label htmlFor="note-title">Title:</label>
+            <input
+              type="text"
+              name="note-title"
+              ref={ref => (this.noteTitle = ref)}
+            />
+            <label htmlFor="note-text">Text:</label>
+            <textarea name="note-text" ref={ref => (this.noteText = ref)} />
+            <input type="submit" value="Add New Note" />
+          </form>
+        </aside>
       </div>
     );
   }

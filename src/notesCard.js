@@ -11,15 +11,9 @@ export default class NoteCard extends React.Component {
     this.save = this.save.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({
-      note: this.props.note
-    });
-  }
-
   save(e) {
     e.preventDefault();
-    const dbRef = firebase.database().ref(this.state.note.key);
+    const dbRef = firebase.database().ref(this.props.note.key);
 
     dbRef.update({
       title: this.noteTitle.value,
@@ -34,8 +28,8 @@ export default class NoteCard extends React.Component {
   render() {
     let editingTemp = (
       <span>
-        <h4>{this.state.note.title}</h4>
-        <p>{this.state.note.text}</p>
+        <h4>{this.props.note.title}</h4>
+        <p>{this.props.note.text}</p>
       </span>
     );
     if (this.state.editing) {
@@ -44,7 +38,7 @@ export default class NoteCard extends React.Component {
           <div>
             <input
               type="text"
-              defaultValue={this.state.note.title}
+              defaultValue={this.props.note.title}
               name="title"
               ref={ref => (this.noteTitle = ref)}
             />
@@ -52,7 +46,7 @@ export default class NoteCard extends React.Component {
           <div>
             <input
               type="text"
-              defaultValue={this.state.note.text}
+              defaultValue={this.props.note.text}
               name="text"
               ref={ref => (this.noteText = ref)}
             />
@@ -69,7 +63,7 @@ export default class NoteCard extends React.Component {
         />
         <i
           className="fa fa-times"
-          onClick={() => this.props.removeNote(this.state.note.key)}
+          onClick={() => this.props.removeNote(this.props.note.key)}
         />
         {editingTemp}
       </div>

@@ -1,77 +1,45 @@
 import React from "react";
 import "./App.css";
-import { noteData } from "./data";
-let noteArray = noteData;
-noteArray.push({ author: "dale", message: "howdy", date: "now" });
 
 class App extends React.Component {
   render() {
     return (
-      <h1>
-        <Note />
-        <Display />
-      </h1>
-    );
-  }
-}
-
-class Note extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
-    alert("Note: " + this.state.value);
-    noteArray.push(this.state);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Insert Note:
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
-
-const Display = () => {
-  return (
-    <div className="card">
-      <div className="container">
-        <NoteList />
-      </div>
-    </div>
-  );
-};
-
-const NoteList = () => {
-  const cells = noteArray.map((note, i) => {
-    return (
       <div>
-        <p key={i}>{note.author}</p>
-        <p key={"message" + i}>{note.message}</p>
-        <p key={"date" + i}>{note.date}</p>
+        <header className="mainHeader">
+          <h1>Noted</h1>
+          <nav>
+            <a href="">Add New Note</a>
+            <section className="notes">
+              <div className="noteCard">
+                <i className="fa fa-edit" />
+                <i className="fa fa-times" />
+                <h4>Test Note</h4>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Reiciendis perferendis corrupti itaque quos alias. Nobis
+                  obcaecati ipsa iure molestias. Sequi sint amet, dignissimos
+                  soluta dolores quos quasi porro perspiciatis optio.
+                </p>
+              </div>
+            </section>
+            <aside className="sidebar">
+              <form>
+                <h3>Add New Note</h3>
+                <div className="close-btn">
+                  <i className="fa fa-times" />
+                </div>
+                <label htmlFor="note-title">Title:</label>
+                <input type="text" name="note-title" />
+                <label htmlFor="note-text">Text:</label>
+                <textarea name="note-text" />
+                <input type="submit" value="Add New Note" />
+              </form>
+            </aside>
+          </nav>
+        </header>
       </div>
     );
-  });
-  return <section className="note-list">{cells}</section>;
-};
+  }
+}
 
 export default App;
